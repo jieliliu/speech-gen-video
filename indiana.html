@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Indiana Disabled Parking Help</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    body { text-align: center; font-family: sans-serif; padding: 2rem; }
+    video { max-width: 600px; margin-top: 20px; }
+    .mermaid { margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <h1>Indiana Disabled Parking Permit</h1>
+
+  <!-- 🐧 video -->
+  <video controls>
+    <source src="indiana_guide.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  
+  <button onclick="generateNarrative()">Generate Penguin Script</button>
+  <div id="narrative-output" style="white-space: pre-wrap; margin-top: 1rem;"></div>
+  
+  <!-- 🧭 Diagram -->
+  <div class="mermaid">
+    graph TD
+      Start[Start] --> Eligibility{Are you eligible?}
+      Eligibility -->|Yes| FillForm[Download Form 42070]
+      FillForm --> Mail[Mail to BMV]
+      Mail --> Done[Wait for approval]
+      Eligibility -->|No| Stop[Not eligible]
+  </div>
+
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  
+    async function generateNarrative() {
+      try {
+        const response = await fetch('http://localhost:3000/generate-narrative', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            url: 'https://www.in.gov/bmv/registration-plates/drivers-with-disabilities/'
+          })
+        });
+  
+        const data = await response.json();
+        document.getElementById('narrative-output').innerText = data.narrative || "❌ Something went wrong.";
+      } catch (error) {
+        console.error('❌ Fetch error:', error);
+        document.getElementById('narrative-output').innerText = "❌ Error fetching narrative.";
+      }
+    }
+  </script>
+  
+</body>
+</html>

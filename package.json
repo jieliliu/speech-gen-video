@@ -1,0 +1,27 @@
+{
+  "name": "speech-gen-video",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jieliliu/speech-gen-video.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jieliliu/speech-gen-video/issues"
+  },
+  "homepage": "https://github.com/jieliliu/speech-gen-video#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "openai": "^4.97.0"
+  }
+}
